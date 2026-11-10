@@ -5,18 +5,18 @@ type BrandLogoProps = {
 };
 
 const logoSizes = {
-  small: 28,
-  medium: 36,
-  large: 48,
+  small: 32,
+  medium: 40,
+  large: 52,
 };
 
 export default function BrandLogo({ size = "medium" }: BrandLogoProps) {
   const dimension = logoSizes[size];
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <Image
-        src="/images/logo.png"
+        src="/images/logo-transparent.png"
         alt="JobTrack logo"
         width={dimension}
         height={dimension}
