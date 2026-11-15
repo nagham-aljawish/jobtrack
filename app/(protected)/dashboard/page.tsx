@@ -1,21 +1,35 @@
-import LogoutButton from "@/components/auth/logout-button";
+import { headers } from "next/headers";
 
-export default function DashboardPage() {
+import { auth } from "@/lib/auth";
+import DashboardHeader from "@/components/dashboard/dashboard-header";
+
+export const instant = false;
+export default async function DashboardPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const userName = session?.user.name ?? "User";
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-6">
-      <div className="rounded-2xl border border-border bg-card p-8 text-center">
-        <h1 className="text-3xl font-bold text-foreground">
-          Welcome to JobTrack!
-        </h1>
+    <div className="min-h-screen">
+      <DashboardHeader
+        userName={userName}
+        title="Overview"
+        description="Welcome back! Here's what's happening with your career journey."
+      />
 
-        <p className="mt-3 text-muted">
-          Your Career Intelligence Dashboard is coming soon.
-        </p>
+      <div className="p-6 lg:p-8">
+        <div className="rounded-2xl border border-border bg-card p-8">
+          <h2 className="text-lg font-semibold text-foreground">
+            Welcome to JobTrack!
+          </h2>
 
-        <div className="mt-8">
-          <LogoutButton />
+          <p className="mt-2 text-sm text-muted">
+            Your Career Intelligence Dashboard is taking shape.
+          </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
